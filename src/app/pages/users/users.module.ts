@@ -7,10 +7,12 @@ import { PipesModule } from '../../pipes/pipes.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from '../../directives/directives.module';
 import { UsersComponent } from './users.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 @NgModule({
   declarations: [
     UsersComponent,
+    UserFormComponent,
   ],
   imports: [
     CommonModule,

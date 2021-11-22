@@ -1,0 +1,20 @@
+.content {
+    overflow-y: scroll;
+    max-height: 70vh;
+
+    .profile-image {
+
+        .actions {
+            display: flex;
+
+            button {
+                width: 50%;
+            }
+        }
+
+        img {
+            width: 200px;
+            padding: 12px 0;
+        }
+    }
+}

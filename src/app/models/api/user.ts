@@ -5,7 +5,7 @@ export interface User extends ApiModel {
     id: number;
     code: string;
     name: string;
-    birthday: string;
+    birthDate: string;
     profileImage?: string;
     profileImageUrl?: string;
     createdAt: string;

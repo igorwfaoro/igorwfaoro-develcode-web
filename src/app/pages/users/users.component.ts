@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { User } from '../../models/api/user';
 import { UserFilter } from '../../models/output/filters/user.filter';
 import { LoaderService } from '../../services/loader.service';
 import { TitleService } from '../../services/title.service';
 import { ToastService } from '../../services/toast.service';
 import { UserService } from '../../services/user.service';
+import { UserFormComponent, UserFormInputData } from './user-form/user-form.component';
 
 @Component({
   selector: 'app-users',
@@ -13,7 +15,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UsersComponent implements OnInit {
 
-public users: User[] = [];
+  public users: User[] = [];
 
   public userFilter: UserFilter = {
     index: 0,
@@ -24,16 +26,18 @@ public users: User[] = [];
     'id',
     'code',
     'name',
-    'birthday',
+    'birthDate',
     'createdAt',
-    'profileImage'
+    'profileImage',
+    'options'
   ];
 
   constructor(
     private _title: TitleService,
     private _loader: LoaderService,
     private _toast: ToastService,
-    private _userService: UserService
+    private _userService: UserService,
+    private _dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -41,23 +45,38 @@ public users: User[] = [];
     this.getUsers();
   }
 
-  private getUsers(reset: boolean = false, cb?: () => void): void {
-    this._loader.show();
+  private getUsers(options: {
+    reset?: boolean;
+    showLoader?: boolean;
+  } = { showLoader: true }): Promise<void> {
 
-    this._userService.getAll(this.userFilter).subscribe(response => {
-      this._loader.dismiss();
+    return new Promise((resolve, reject) => {
 
-      if (reset)
-        this.users = [];
+      if (options.showLoader)
+        this._loader.show();
 
-      this.users = this.users.concat(response);
-      
-      if (cb) cb();
+      this._userService.getAll(this.userFilter).subscribe(response => {
 
-    }, error => {
-      this._loader.dismiss();
-      this._toast.showHttpError(error);
-    })
+        if (options.showLoader)
+          this._loader.dismiss();
+
+        if (options.reset)
+          this.users = [];
+
+        this.users = this.users.concat(response);
+
+        resolve();
+
+      }, error => {
+
+        if (options.showLoader)
+          this._loader.dismiss();
+
+        this._toast.showHttpError(error);
+
+        reject();
+      })
+    });
   }
 
   public loadMore(): void {
@@ -67,8 +86,21 @@ public users: User[] = [];
 
   public search(query: string): void {
     this.userFilter.q = query;
-    this.getUsers(true, () => {
-      this.userFilter.q = null;
+
+    this.getUsers({ reset: true }).then(() => {
+      this.userFilter.q = null
     });
+  }
+
+  public openForm(userId?: number): void {
+
+    const data: UserFormInputData = { userId }
+
+    const dialog = this._dialog.open(UserFormComponent, {
+      data,
+      width: '500px'
+    });
+
+    dialog.afterClosed().subscribe(() => this.getUsers({ reset: true, showLoader: false }));
   }
 }

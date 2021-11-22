@@ -24,12 +24,26 @@ export class UserService {
         return this._http.get<User>(`${URLS.api.users}/${id}`);
     }
 
-    public create(body: UserOutput): Observable<User> {
-        return this._http.post<User>(`${URLS.api.users}`, body);
+    public create(body: UserOutput, profileImageFile: any): Observable<User> {
+        const data = new FormData();
+
+        if(profileImageFile)
+            data.append('profileImage', profileImageFile);
+            
+        data.append('data', JSON.stringify(body));
+
+        return this._http.post<User>(`${URLS.api.users}`, data);
     }
 
-    public update(body: UserOutput): Observable<User> {
-        return this._http.put<User>(`${URLS.api.users}`, body);
+    public update(body: UserOutput, profileImageFile: any): Observable<User> {
+        const data = new FormData();
+
+        if(profileImageFile)
+            data.append('profileImage', profileImageFile);
+            
+        data.append('data', JSON.stringify(body));
+
+        return this._http.put<User>(`${URLS.api.users}`, data);
     }
 
     public delete(id: number): Observable<void> {

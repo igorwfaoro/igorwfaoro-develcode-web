@@ -7,58 +7,94 @@
 <div class="row">
     <div class="col-sm-12">
         <mat-form-field style="width: 100%;">
-            <input #searchInput matInput placeholder="Code, Name..." (keyup.enter)="search(searchInput.value)">
+            <input #searchInput
+                   matInput
+                   placeholder="Code, Name..."
+                   (keyup.enter)="search(searchInput.value)">
         </mat-form-field>
     </div>
 </div>
 
-<table mat-table [dataSource]="users">
+<table mat-table
+       [dataSource]="users">
 
     <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef>#</th>
-        <td mat-cell *matCellDef="let element">{{element.id}}</td>
+        <th mat-header-cell
+            *matHeaderCellDef>#</th>
+        <td mat-cell
+            *matCellDef="let element"
+            class="id">{{element.id}}</td>
     </ng-container>
 
     <ng-container matColumnDef="code">
-        <th mat-header-cell *matHeaderCellDef>Code</th>
-        <td mat-cell *matCellDef="let element">{{element.code}}</td>
+        <th mat-header-cell
+            *matHeaderCellDef>Code</th>
+        <td mat-cell
+            *matCellDef="let element">{{element.code}}</td>
     </ng-container>
 
     <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Nome</th>
-        <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        <th mat-header-cell
+            *matHeaderCellDef>Nome</th>
+        <td mat-cell
+            *matCellDef="let element">{{element.name}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="birthday">
-        <th mat-header-cell *matHeaderCellDef>Birthday</th>
-        <td mat-cell *matCellDef="let element">{{element.birthday}}</td>
+    <ng-container matColumnDef="birthDate">
+        <th mat-header-cell
+            *matHeaderCellDef>birthDate</th>
+        <td mat-cell
+            *matCellDef="let element">{{element.birthDate}}</td>
     </ng-container>
 
     <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">{{element.createdAt | momentCalendar}}</td>
+        <th mat-header-cell
+            *matHeaderCellDef>Created At</th>
+        <td mat-cell
+            *matCellDef="let element">{{element.createdAt | momentCalendar}}</td>
     </ng-container>
 
     <ng-container matColumnDef="profileImage">
-        <th mat-header-cell *matHeaderCellDef></th>
-        <td mat-cell *matCellDef="let element">{{element.profileImageUrl}}</td>
-    </ng-container>
-
-    <ng-container matColumnDef="options">
-        <th mat-header-cell *matHeaderCellDef>Options</th>
-        <td mat-cell *matCellDef="let element">
-            <mat-icon>edit</mat-icon>
+        <th mat-header-cell
+            *matHeaderCellDef>Profile image</th>
+        <td mat-cell
+            *matCellDef="let element"
+            class="profile-image">
+            <img [src]="element.profileImageUrl"
+                 [alt]="element.name">
         </td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+    <ng-container matColumnDef="options">
+        <th mat-header-cell
+            *matHeaderCellDef>Options</th>
+        <td mat-cell
+            *matCellDef="let element">
+
+            <button mat-stroked-button
+                    color="primary"
+                    (click)="openForm(element.id)">
+                <mat-icon>edit</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row
+        *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row
+        *matRowDef="let row; columns: tableColumns;"
+        class="user"></tr>
 </table>
 
 <div style="text-align: center; padding: 10px;">
-    <button mat-flat-button color="primary" (click)="loadMore()">More...</button>
+    <button mat-flat-button
+            color="primary"
+            (click)="loadMore()">More...</button>
 </div>
 
-<button routerLink="/users/new" mat-fab color="primary" class="btn-add">
+<button (click)="openForm()"
+        mat-fab
+        color="primary"
+        class="btn-add">
     <mat-icon>add</mat-icon>
 </button>
