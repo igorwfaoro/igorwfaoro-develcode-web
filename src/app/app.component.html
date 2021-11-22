@@ -1,0 +1,31 @@
+<div class="loader-background"
+     *ngIf="loaderState">
+  <div class="loader">
+    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+    <mat-spinner diameter="60"></mat-spinner>
+    <div class="loader-text">⏳ Please wait...</div>
+  </div>
+</div>
+
+<mat-toolbar color="primary">
+
+  <a class="toolbar-link"
+     routerLink="/home">
+    <img style="height: 18px; margin-bottom: 7px;;"
+         src="assets/images/logo-white.png">
+  </a>
+
+  <ul>
+    <li *ngFor="let menu of toolbarMenus">
+      <a [routerLink]="menu.route"
+         routerLinkActive="active">{{ menu.title }}</a>
+    </li>
+  </ul>
+
+</mat-toolbar>
+
+<div class="main">
+  <router-outlet></router-outlet>
+</div>
+
+<footer></footer>

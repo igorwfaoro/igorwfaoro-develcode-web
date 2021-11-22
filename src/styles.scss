@@ -1,0 +1,155 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css");
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+@import "./theme/default.scss";
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap");
+
+* {
+  font-family: "Ubuntu";
+}
+
+html {
+  height: 100%;
+  outline: none !important;
+}
+
+body {
+  margin: 0;
+}
+
+button,
+input {
+  outline: none !important;
+}
+
+.mat-dialog-container {
+  border-radius: 24px;
+}
+
+.mat-tooltip {
+  margin-top: 0 !important;
+}
+
+.default-margin-top {
+  margin-top: 12px;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.row {
+  margin: 0 !important;
+}
+
+canvas {
+  outline: none;
+}
+
+.no-select {
+  -webkit-touch-callout: none !important; /* iOS Safari */
+  -webkit-user-select: none !important; /* Safari */
+  -khtml-user-select: none !important; /* Konqueror HTML */
+  -moz-user-select: none !important; /* Old versions of Firefox */
+  -ms-user-select: none !important; /* Internet Explorer/Edge */
+  user-select: none !important; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.mat-card {
+  border-radius: 23px !important;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.16) !important;
+  // margin: 8px !important;
+}
+
+.mat-button-base {
+  border-radius: 50px !important;
+}
+
+::selection {
+  color: #fff;
+  background: var(--primary-color-light);
+  text-shadow: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.mat-form-field {
+  line-height: 1.5 !important;
+}
+
+a[mat-button],
+a[mat-raised-button],
+a[mat-flat-button],
+a[mat-stroked-button] {
+  text-decoration: none;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.ngx-json-viewer-overflow-auto {
+  .ngx-json-viewer {
+    overflow: auto !important;
+  }
+}
+
+.mat-list-base-no-padding-top {
+  .mat-list-base {
+    padding-top: 0 !important;
+  }
+}
+
+.mat-expansion-panel-body-no-padding {
+  .mat-expansion-panel-body {
+    padding: 0 !important;
+  }
+}
+
+.map-marker-label {
+  font-size: 14px;
+  font-weight: bold;
+  background: #fff;
+  border-radius: 7px;
+  // width: 28px;
+  // height: 28px;
+  padding: 2px;
+  border: 1px solid #444;
+  margin-bottom: 60px;
+}
+
+mat-date-range-input {
+  input[disabled] {
+    color: #000 !important;
+  }
+
+  .mat-date-range-input-start-wrapper {
+    padding: 0 2px !important;
+  }
+}
