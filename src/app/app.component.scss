@@ -8,6 +8,29 @@ mat-toolbar {
   color: #fff;
 }
 
+mat-toolbar {
+  .toolbar-link {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .toolbar-items {
+    display: flex;
+    gap: 12px;
+    font-size: 14px;
+    margin: 0 0 0 18px;
+    padding: 0;
+
+    li {
+      list-style-type: none;
+
+      a {
+        color: #fff;
+      }
+    }
+  }
+}
+
 .main {
   padding-top: 64px;
 }

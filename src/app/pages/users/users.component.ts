@@ -8,6 +8,7 @@ import { TitleService } from '../../services/title.service';
 import { ToastService } from '../../services/toast.service';
 import { UserService } from '../../services/user.service';
 import { DialogMessageComponent } from '../../shared/dialog-message/dialog-message.component';
+import { UserDetailsComponent, UserDetailsInputData } from './user-details/user-details.component';
 import { UserFormComponent, UserFormInputData } from './user-form/user-form.component';
 
 @Component({
@@ -29,7 +30,7 @@ export class UsersComponent implements OnInit {
     'code',
     'name',
     'profileImage',
-    'options'
+    'actions'
   ];
 
   constructor(
@@ -60,8 +61,10 @@ export class UsersComponent implements OnInit {
         if (options.showLoader)
           this._loader.dismiss();
 
-        if (options.reset)
+        if (options.reset) {
           this.users = [];
+          this.userFilter.index = 0;
+        }
 
         this.users = this.users.concat(response);
 
@@ -94,6 +97,12 @@ export class UsersComponent implements OnInit {
 
   public openDetails(userId: number): void {
 
+    const data: UserDetailsInputData = { userId }
+
+    this._dialog.open(UserDetailsComponent, {
+      data,
+      width: '500px'
+    });
   }
 
   public openForm(userId?: number): void {

@@ -12,6 +12,17 @@ table {
                 padding: 8px 0;
             }
         }
+
+        .actions {
+
+            button {
+                margin-right: 8px;
+            }
+
+            :last-child {
+                margin-right: 0;
+            }
+        }
     }
 }
 

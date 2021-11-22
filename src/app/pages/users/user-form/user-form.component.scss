@@ -2,8 +2,14 @@
     overflow-y: scroll;
     max-height: 70vh;
 
-    .profile-image {
+    .code {
+        input {
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+    }
 
+    .profile-image {
         .actions {
             display: flex;
 

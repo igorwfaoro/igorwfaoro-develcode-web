@@ -10,12 +10,11 @@
 <mat-toolbar color="primary">
 
   <a class="toolbar-link"
-     routerLink="/home">
-    <img style="height: 18px; margin-bottom: 7px;;"
-         src="assets/images/logo-white.png">
+     routerLink="/">
+    IWF Develcode Web
   </a>
 
-  <ul>
+  <ul class="toolbar-items">
     <li *ngFor="let menu of toolbarMenus">
       <a [routerLink]="menu.route"
          routerLinkActive="active">{{ menu.title }}</a>

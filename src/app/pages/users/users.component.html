@@ -51,11 +51,12 @@
         </td>
     </ng-container>
 
-    <ng-container matColumnDef="options">
+    <ng-container matColumnDef="actions">
         <th mat-header-cell
-            *matHeaderCellDef>Options</th>
+            *matHeaderCellDef>Actions</th>
         <td mat-cell
-            *matCellDef="let element">
+            *matCellDef="let element"
+            class="actions">
 
             <button mat-stroked-button
             title="Details"

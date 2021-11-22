@@ -8,11 +8,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DirectivesModule } from '../../directives/directives.module';
 import { UsersComponent } from './users.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { UserDetailsComponent } from './user-details/user-details.component';
 
 @NgModule({
   declarations: [
     UsersComponent,
     UserFormComponent,
+    UserDetailsComponent,
   ],
   imports: [
     CommonModule,

@@ -15,6 +15,10 @@ export class AppComponent implements OnInit {
     {
       title: 'Users',
       route: '/users'
+    },
+    {
+      title: 'igorwfaoro (Github)',
+      route: 'https://github.com/igorwfaoro'
     }
   ];
 

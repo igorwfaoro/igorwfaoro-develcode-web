@@ -1,0 +1,23 @@
+<button-dialog-close></button-dialog-close>
+
+<div class="content"
+     *ngIf="user">
+
+    <div class="profile-image">
+        <img [src]="user.profileImageUrl"
+             [alt]="user.name">
+    </div>
+
+    <div class="header">
+        <div class="name">{{ user.name }}</div>
+        <div class="code">#{{ user.code }}</div>
+    </div>
+
+    <div class="birth-date">
+        <div class="label">Birth Date</div>
+        <div class="value">{{ user.birthDate | momentDate:'YYYY-MM-DD' }}</div>
+    </div>
+
+    <div class="created-at">Registration: {{ user.createdAt | momentFromNow }}</div>
+
+</div>

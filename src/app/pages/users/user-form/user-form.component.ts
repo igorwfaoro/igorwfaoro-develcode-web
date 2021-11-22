@@ -2,13 +2,14 @@ import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { User } from '../../../models/api/user';
 import { UserOutput } from '../../../models/output/user.output';
 import { LoaderService } from '../../../services/loader.service';
 import { ToastService } from '../../../services/toast.service';
 import { UserService } from '../../../services/user.service';
 import * as moment from 'moment';
+import { debounceTime } from 'rxjs/operators';
 
 export interface UserFormInputData {
   userId?: number;
@@ -34,12 +35,12 @@ export class UserFormComponent implements OnInit {
 
   @ViewChild('profileImageInput', { static: false }) public profileImageInput: ElementRef;
 
+  private _verifyCodeSubject: Subject<string> = new Subject();
+
   constructor(
     private _loader: LoaderService,
     private _toast: ToastService,
     private _userService: UserService,
-    private _router: Router,
-    private _dialog: MatDialog,
     private _dialogRef: MatDialogRef<UserFormComponent>,
     @Inject(MAT_DIALOG_DATA) public inputData: UserFormInputData
   ) {
@@ -51,6 +52,17 @@ export class UserFormComponent implements OnInit {
 
     if (userId)
       this.getUser(userId);
+
+    this._verifyCodeSubject.pipe(
+      debounceTime(500)
+    ).subscribe(code => {
+      this._userService.codeExists(code, this.user?.id).subscribe(exists => {
+        this.userForm.get('code').setErrors(exists ? {
+          alreadyExists: true,
+          incorrect: true
+        } : null);
+      });
+    });
   }
 
   private initForm(): void {
@@ -143,5 +155,9 @@ export class UserFormComponent implements OnInit {
     this.profileImageLoaded.url = null;
 
     this._removeProfileImage = true;
+  }
+
+  public verifyCode(): void {
+    this._verifyCodeSubject.next(this.userForm.get('code').value);
   }
 }
